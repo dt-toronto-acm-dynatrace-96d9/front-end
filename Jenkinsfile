@@ -56,6 +56,29 @@ pipeline {
         }
       }
     }
+    stage('DT Deploy Event') {
+      when {
+          expression {
+          return env.BRANCH_NAME ==~ 'release/.*' || env.BRANCH_NAME ==~'master'
+          }
+      }
+      steps {
+          createDynatraceDeploymentEvent(
+          envId: 'Dynatrace Tenant',
+          tagMatchRules: [
+              [
+              meTypes: [
+                  [meType: 'SERVICE']
+              ],
+              tags: [
+                  [context: 'CONTEXTLESS', key: 'app', value: "${env.APP_NAME}"],
+                  [context: 'CONTEXTLESS', key: 'environment', value: 'dev']
+              ]
+              ]
+          ]) {
+          }
+      }
+    }
     stage('Mark artifact for staging namespace') {
       when {
         expression {
