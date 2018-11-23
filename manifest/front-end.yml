@@ -29,13 +29,6 @@ spec:
             memory: 300Mi
         ports:
         - containerPort: 8080
-        securityContext:
-          runAsNonRoot: true
-          runAsUser: 10001
-          capabilities:
-            drop:
-              - all
-          readOnlyRootFilesystem: true
         livenessProbe:
           httpGet:
             path: /
