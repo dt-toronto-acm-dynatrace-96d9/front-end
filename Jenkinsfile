@@ -40,7 +40,7 @@ pipeline {
       }
       steps {
         container('docker') {
-          sh "docker build -t ${_TAG_DEV} ."
+          sh "docker build --no-cache -t ${_TAG_DEV} ."
         }
       }
     }
