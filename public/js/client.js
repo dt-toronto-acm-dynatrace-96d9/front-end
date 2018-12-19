@@ -116,7 +116,7 @@ function order() {
 
 function deleteCart() {
     $.ajax({
-        url: "http://cart",
+        url: "cart",
         type: "DELETE",
         async: true,
         success: function (data, textStatus, jqXHR) {
